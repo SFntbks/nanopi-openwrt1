@@ -92,7 +92,6 @@ jobs:
           cd ~/lede && rm -rf tmp/
           cat $GITHUB_WORKSPACE/$DEVICE.config.seed $GITHUB_WORKSPACE/common.seed | sed 's/\(CONFIG_PACKAGE_luci-app-[^A-Z]*=\)y/\1m/' > .config
           find package/ -type d -name luci-app-* | rev | cut -d'/' -f1 | rev | xargs -ri echo CONFIG_PACKAGE_{}=m >> .config
-          cat more_luci.txt >> .config
           make defconfig && sed -i -E 's/# (CONFIG_.*_COMPRESS_UPX) is not set/\1=y/' .config && make defconfig
           cat .config
 
