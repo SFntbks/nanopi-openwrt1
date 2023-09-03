@@ -148,7 +148,6 @@ jobs:
           path: ./artifact/buildinfo/
 
       - name: Save cache state
-        if: env.TG
         run: |
           cd
           sleep 60
@@ -159,7 +158,7 @@ jobs:
           sudo losetup -d $LOOP_DEVICE
           export AUTH="Authorization: token ${{ secrets.SEC_TOKEN }}"
           export cache_path='github.com/repositories/686564644/releases'
-          export cache_repo_id='39020554'
+          export cache_repo_id='119728895'
           #zstdmt -c --adapt --long lede.img | parallel --wc --block 1.99G --pipe \
           #'curl -s --data-binary @- -H "$AUTH" -H "Content-Type: application/octet-stream" https://uploads.$cache_path/$cache_repo_id/assets?name=lede.'$DEVICE'.img.zst.0{#} > /dev/null'
           zstdmt -c --long lede.img | split --numeric=1 -b 2000m - lede.$DEVICE.img.zst.
@@ -179,12 +178,6 @@ jobs:
           if [ $? -eq 0 ]; then break; fi
           done
           set -e
-
-      - name: Send tg notification
-        if: env.TG
-        run: |
-          curl -k --data chat_id="${{secrets.TELEGRAM_CHAT_ID}}" --data "text=The ${{env.DEVICE}} build ran completed at ${{job.status}}." "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage"
-
       
   generate_slim_firmware:
     needs: build_packages
