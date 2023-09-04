@@ -86,7 +86,7 @@ case $DEVICE in
     echo -e "\toption governor0 'schedutil'" >> $config_file_cpufreq
     echo -e "\toption minfreq0 '816000'" >> $config_file_cpufreq
     echo -e "\toption maxfreq0 '1512000'\n" >> $config_file_cpufreq
-
+    sed -i 's,-mcpu=generic,-march=armv8-a,g' include/target.mk
     line_number_CONFIG_CRYPTO_LIB_BLAKE2S=$[`grep -n 'CONFIG_CRYPTO_LIB_BLAKE2S' package/kernel/linux/modules/crypto.mk | cut -d: -f 1`+1]
     sed -i $line_number_CONFIG_CRYPTO_LIB_BLAKE2S' s/HIDDEN:=1/DEPENDS:=@(LINUX_5_4||LINUX_5_10)/' package/kernel/linux/modules/crypto.mk
     sed -i 's/libblake2s.ko@lt5.9/libblake2s.ko/;s/libblake2s-generic.ko@lt5.9/libblake2s-generic.ko/' package/kernel/linux/modules/crypto.mk
@@ -104,7 +104,6 @@ if [[ $DEVICE == 'r6s' || $DEVICE == 'r6c' ]]; then
   mv *.patch target/linux/generic/hack-6.1/
   wget https://github.com/coolsnowwolf/lede/raw/master/target/linux/generic/pending-6.1/613-netfilter_optional_tcp_window_check.patch
   mv *.patch target/linux/generic/pending-6.1/
-  sed -i "s/ucidef_set_interfaces_lan_wan 'eth0 eth1' 'eth2'/ucidef_set_interfaces_lan_wan 'eth1 eth2' 'eth0'/" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
   sed -i 's/DEFAULT_PACKAGES \+=/DEFAULT_PACKAGES += autocore-arm/' target/linux/rockchip/Makefile
   git diff
 fi
