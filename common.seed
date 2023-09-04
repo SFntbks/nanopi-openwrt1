@@ -29,10 +29,10 @@ CONFIG_PACKAGE_luci-app-dockerman=y
 CONFIG_DOCKER_OPTIONAL_FEATURES=y
 CONFIG_PACKAGE_luci-app-netdata=y
 CONFIG_PACKAGE_luci-app-cpufreq=y
-CONFIG_PACKAGE_luci-app-samba=y
+
 CONFIG_PACKAGE_luci-app-statistics=y
 CONFIG_PACKAGE_luci-app-mwan3=y
-CONFIG_PACKAGE_luci-app-pushbot=y
+
 CONFIG_PACKAGE_luci-app-filebrowser=y
 CONFIG_PACKAGE_luci-app-zerotier=y
 CONFIG_PACKAGE_luci-lib-json=y
