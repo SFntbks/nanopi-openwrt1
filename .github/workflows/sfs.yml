@@ -1,4 +1,4 @@
-name: build
+name: sfs
 
 on:
   repository_dispatch:
