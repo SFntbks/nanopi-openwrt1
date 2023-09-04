@@ -35,25 +35,28 @@ rm -rf package/custom; mkdir package/custom
 merge_feed nas "https://github.com/linkease/nas-packages;master"
 merge_feed nas_luci "https://github.com/linkease/nas-packages-luci;main"
 rm -r package/feeds/nas_luci/luci-app-ddnsto
-merge_feed helloworld "https://github.com/stupidloud/helloworld;tmp"
+merge_feed helloworld "https://github.com/stupidloud/helloworld;lean"
 merge_package https://github.com/ilxp/luci-app-ikoolproxy
-merge_package https://github.com/sundaqiang/openwrt-packages/trunk/luci-app-wolplus
+merge_package https://github.com/sundaqiang/openwrt-packages/tree/master/luci-app-wolplus
 merge_package https://github.com/liudf0716/luci-app-xfrpc && sed -i 's/\.\.\/\.\.\/luci/$(TOPDIR)\/feeds\/luci\/luci/' package/custom/luci-app-xfrpc/Makefile
-merge_package https://github.com/messense/aliyundrive-webdav/trunk/openwrt/aliyundrive-webdav
-merge_package https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app-aliyundrive-webdav
+merge_package https://github.com/messense/aliyundrive-webdav/tree/main/openwrt/aliyundrive-webdav
+merge_package https://github.com/messense/aliyundrive-webdav/tree/main/openwrt/luci-app-aliyundrive-webdav
 merge_package "-b 18.06 https://github.com/jerrykuku/luci-theme-argon"
-merge_package https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
-merge_package https://github.com/NateLol/luci-app-oled
+merge_package https://github.com/vernesong/OpenClash/tree/master/luci-app-openclash
+merge_package https://github.com/NateLol/luci-app-oled/tree/master/luci-app-oled
 merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/brook
 merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/chinadns-ng
 merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/trojan-go
 merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/trojan-plus
+merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/v2ray-core
+merge_package https://github.com/xiaorouji/openwrt-passwall/tree/packages/xray-core
 merge_package "-b luci https://github.com/xiaorouji/openwrt-passwall"
 merge_package https://github.com/jerrykuku/lua-maxminddb
 merge_package https://github.com/jerrykuku/luci-app-vssr
 merge_package https://github.com/kongfl888/luci-app-adguardhome
+merge_package https://github.com/sbwml/luci-app-mosdns/tree/v5/luci-app-mosdns
+merge_package https://github.com/sbwml/luci-app-mosdns/tree/v5/mosdns
 drop_package luci-app-cd8021x
 drop_package luci-app-cifs
 drop_package verysync
 drop_package luci-app-verysync
-drop_package luci-app-mosdns
