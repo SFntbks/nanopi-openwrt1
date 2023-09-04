@@ -77,7 +77,7 @@ jobs:
           cd lede && rm -f zerospace && git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git fetch && git reset --hard origin/$BRANCH && git clean -df
           else
-          sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/coolsnowwolf/lede lede
+          sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/DHDAXCW/lede-rockchip lede
           fi
 
       - name: Update feeds and packages
@@ -89,15 +89,13 @@ jobs:
             pushd feeds/luci; git restore .; popd
             pushd feeds/routing; git restore .; popd
             pushd feeds/telephony; git restore .; popd
-            rm -rf feeds/packages/net/mosdns
           fi
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           . $GITHUB_WORKSPACE/scripts/merge_packages.sh
           . $GITHUB_WORKSPACE/scripts/patches.sh
-          rm -rf feeds/packages/net/mosdns
           cd
-          svn export https://github.com/openwrt/luci/branches/master luci
+          svn export https://github.com/DHDAXCW/luci luci
           pushd luci
           ls -d */ | xargs -ri diff -q {} ../lede/feeds/luci/{} | grep Only | grep lede | grep -E applications\|themes | awk '{print $4}' | xargs -ri echo CONFIG_PACKAGE_{}=m > ~/lede/more_luci.txt
           popd
