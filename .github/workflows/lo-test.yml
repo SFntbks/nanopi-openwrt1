@@ -26,18 +26,7 @@ jobs:
 
     steps:
     
-      - name: Show system
-        run: |
-          echo -e "Total CPU cores\t: $(nproc)"
-          cat /proc/cpuinfo | grep 'model name'
-          cpu_name=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F: '{print $2}' | sed 's/^[ \t]*//')
-          if [[ ! "$cpu_name" =~ "8370C" ]]; then
-          echo "CPU不为8370C，性能不足，停止执行命令"
-          exit 1
-          else
-          echo "CPU为8370C，继续执行命令"
-          ulimit -a
-          fi
+      
 
       - name: Space cleanup
         env:
@@ -77,7 +66,7 @@ jobs:
           cd lede && rm -f zerospace && git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git fetch && git reset --hard origin/$BRANCH && git clean -df
           else
-          sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/DHDAXCW/lede-rockchip lede
+          sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/DHDAXCW/lede-rockchip/branches/stable lede
           fi
 
       - name: Update feeds and packages
