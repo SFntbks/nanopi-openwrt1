@@ -89,11 +89,13 @@ jobs:
             pushd feeds/luci; git restore .; popd
             pushd feeds/routing; git restore .; popd
             pushd feeds/telephony; git restore .; popd
+            rm -rf feeds/packages/net/mosdns
           fi
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           . $GITHUB_WORKSPACE/scripts/merge_packages.sh
           . $GITHUB_WORKSPACE/scripts/patches.sh
+          rm -rf feeds/packages/net/mosdns
           cd
           svn export https://github.com/openwrt/luci/branches/master luci
           pushd luci
@@ -106,7 +108,7 @@ jobs:
           cat $GITHUB_WORKSPACE/$DEVICE.config.seed $GITHUB_WORKSPACE/common.seed | sed 's/\(CONFIG_PACKAGE_luci-app-[^A-Z]*=\)y/\1m/' > .config
           find package/ -type d -name luci-app-* | rev | cut -d'/' -f1 | rev | xargs -ri echo CONFIG_PACKAGE_{}=m >> .config
           cat $GITHUB_WORKSPACE/extra_packages.seed >> .config
-          #cat more_luci.txt >> .config
+          cat more_luci.txt >> .config
           make defconfig && sed -i -E 's/# (CONFIG_.*_COMPRESS_UPX) is not set/\1=y/' .config && make defconfig
           cat .config
 
