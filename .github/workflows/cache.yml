@@ -1,4 +1,4 @@
-name: build
+name: ext4 build
 
 on:
   repository_dispatch:
