@@ -1,4 +1,4 @@
-name: tbuild
+name: test-build
 
 on:
   repository_dispatch:
