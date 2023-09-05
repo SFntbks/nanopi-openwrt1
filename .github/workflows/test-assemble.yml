@@ -223,7 +223,7 @@ jobs:
           tag: ${{env.strDate}}
           file_glob: true
           overwrite: true
-          release_name: ${{env.strDate}} 自动发布
+          release_name: ${{env.strDate}} 自动发布-test
 
   generate_firmware:
     needs: build_packages
@@ -285,4 +285,4 @@ jobs:
           tag: ${{env.strDate}}
           file_glob: true
           overwrite: true
-          release_name: ${{env.strDate}} 自动发布
+          release_name: ${{env.strDate}} 自动发布-test
