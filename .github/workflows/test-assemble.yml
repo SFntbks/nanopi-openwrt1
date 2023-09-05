@@ -1,4 +1,4 @@
-name: test组装
+name: test-assemble
 
 on:
   repository_dispatch:
