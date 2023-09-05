@@ -1,4 +1,4 @@
-name: sfs
+name: test组装
 
 on:
   repository_dispatch:
